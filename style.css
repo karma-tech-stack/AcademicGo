@@ -1,0 +1,108 @@
+body {
+  font-family: 'tahoma', sans-serif;
+  background-color: #eef5ff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #18b1c2;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input[type="text"], select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Submit and Done buttons remain unchanged */
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px 30px;
+  font-size: 16px;
+  background: #4ad9ec;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #18bbdc;
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+body {
+  background-image: url(BG.jpg);
+  background-size: cover;
+}
+
+.home-button-container {
+  display: inline-flex;
+  justify-content: flex-start; /* Align left */
+  padding: 20px;
+  background-color: #e9f2ff; /* light background */
+}
+
+/* Home button color and animation like Start Now button, size unchanged */
+.back-home {
+  margin-left: 1%;
+  margin-top: 1%;
+  display: inline-block;
+  padding: 10px 20px; /* keep original size */
+  font-weight: unset;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 8px;
+  background: #4ad9ec; /* Start Now button color */
+  color: rgb(239, 238, 238);        /* Start Now button text color */
+  transition: 0.3s ease;
+}
+
+.back-home:hover {
+  background-color: #18b1c2; /* Hover color like Start Now */
+  transform: scale(1.05);    /* Animation like Start Now */
+  opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  button {
+    font-size: 14px;
+  }   
+}

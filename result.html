@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Career Guidance Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>Your Recommended SHS Strand</h1>
+      <div class="recommendation" id="resultBox">
+        <h2 id="strandName">Loading...</h2>
+        <p id="strandDesc"></p>
+        <h3>Possible College Courses:</h3>
+        <ul class="courses" id="strandCourses"></ul>
+        <h3>Colleges & Universities Offering These:</h3>
+        <ul class="colleges" id="strandColleges"></ul>
+      </div>
+      <button class="done-button" onclick="window.location.href='index.html'">Done</button>
+    </div>
+  </div>
+
+  <script>
+    const category = localStorage.getItem("careerCluster"); 
+    const strandName = document.getElementById("strandName");
+    const strandDesc = document.getElementById("strandDesc");
+    const strandCourses = document.getElementById("strandCourses");
+    const strandColleges = document.getElementById("strandColleges");
+
+    const data = {
+      "Arts, Social Sciences, and Humanities": {
+        desc: "For creative, expressive, and socially aware students.",
+        courses: ["Communication Arts", "Education", "Psychology", "Political Science"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "University of the Philippines", url: "https://up.edu.ph" },
+          { name: "Ateneo de Manila University", url: "https://ateneo.edu" }
+        ]
+      },
+      "Business and Entrepreneurship": {
+        desc: "For future entrepreneurs, managers, and leaders.",
+        courses: ["Business Administration", "Accountancy", "Marketing", "Tourism"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "De La Salle University", url: "https://www.dlsu.edu.ph" },
+          { name: "San Beda University", url: "https://www.sanbeda.edu.ph" }
+        ]
+      },
+      "Science, Technology, Engineering, and Mathematics": {
+        desc: "For analytical thinkers and problem-solvers.",
+        courses: ["Engineering", "Computer Science", "Architecture", "Medicine"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "Mapúa University", url: "https://www.mapua.edu.ph" },
+          { name: "University of Santo Tomas", url: "https://www.ust.edu.ph" }
+        ]
+      },
+      "Sports, Health, and Wellness": {
+        desc: "For active and health-conscious students.",
+        courses: ["Sports Science", "Physical Education", "Nursing", "Nutrition"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "Philippine Normal University", url: "https://www.pnu.edu.ph" },
+          { name: "University of the East Ramon Magsaysay", url: "https://www.uerm.edu.ph" }
+        ]
+      },
+      "ICT": {
+        desc: "For students skilled in computers and digital tech.",
+        courses: ["Information Technology", "Computer Science", "Multimedia Arts"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "AMA University", url: "https://www.ama.edu.ph" },
+          { name: "FEU Institute of Technology", url: "https://www.feutech.edu.ph" }
+        ]
+      },
+      "Cookery": {
+        desc: "For aspiring chefs and culinary experts.",
+        courses: ["Culinary Arts", "Hotel & Restaurant Management", "Nutrition"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "Center for Culinary Arts", url: "https://cca-manila.edu.ph" },
+          { name: "Lyceum of the Philippines University", url: "https://lpu.edu.ph" }
+        ]
+      },
+      "Agriculture": {
+        desc: "For students interested in farming and agri-technology.",
+        courses: ["Agricultural Technology", "Crop Science", "Animal Husbandry"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "Central Mindanao University", url: "https://cmu.edu.ph" },
+          { name: "Visayas State University", url: "https://vsu.edu.ph" }
+        ]
+      },
+      "SMAW": {
+        desc: "For students skilled in Shielded Metal Arc Welding.",
+        courses: ["Welding Technology", "Metal Fabrication", "Industrial Skills"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "TESDA Accredited Centers", url: "https://tesda.gov.ph" }
+        ]
+      },
+      "EIM": {
+        desc: "For students skilled in Electrical Installation and Maintenance.",
+        courses: ["Electrical Technology", "Industrial Maintenance", "Electronics"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "AMA University", url: "https://www.ama.edu.ph" }
+        ]
+      },
+      "Automotive": {
+        desc: "For students interested in automotive repair and mechanics.",
+        courses: ["Automotive Technology", "Engine Diagnostics", "Auto Mechanics"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" },
+          { name: "TESDA Accredited Automotive Centers", url: "https://tesda.gov.ph" }
+        ]
+      },
+      "Flexible / Unsure": {
+        desc: "You have diverse interests.",
+        courses: ["Explore different electives until you find your passion!"],
+        colleges: [
+          { name: "Bukidnon State University", url: "https://buksu.edu.ph" }
+        ]
+      }
+    };
+
+    if (category && data[category]) {
+      strandName.textContent = category;
+      strandDesc.textContent = data[category].desc;
+
+      strandCourses.innerHTML = "";
+      data[category].courses.forEach(c => {
+        const li = document.createElement("li");
+        li.textContent = c;
+        strandCourses.appendChild(li);
+      });
+
+      strandColleges.innerHTML = "";
+      data[category].colleges.forEach(college => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = college.url;
+        a.target = "_blank";
+        a.textContent = college.name;
+        li.appendChild(a);
+        strandColleges.appendChild(li);
+      });
+    } else {
+      strandName.textContent = "No clear result";
+      strandDesc.textContent = "Try retaking the questionnaire.";
+    }
+  </script>
+</body>
+</html>
